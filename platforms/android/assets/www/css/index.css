@@ -1,0 +1,102 @@
+/*#home * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+#home .ui-header .ui-btn {
+    background: none;
+    border: none;
+    top: 9px;
+}
+#home .ui-header .ui-btn-inner {
+    border: none;
+}*/
+
+.ui-page {
+    background: transparent url(../img/gray_background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+}
+
+.hourly{
+    padding-top: 50px;
+    position: relative;
+/*    margin: 0 auto;
+    width: 90%;*/
+}
+
+.hourly table{
+    table-layout: auto;
+    background-color: black;
+    opacity: 0.75;
+    border-radius: 10px;
+/*    text-align: center;*/
+}
+
+.hourly td{
+    padding: 15px;
+    background-color: gray;
+    opacity: 0.75;
+}
+
+.flipUnit{
+    float: right;
+    top:0%;
+}
+
+#timestamp{
+    font-size: xx-small;
+    text-align: center;
+}
+
+.output{
+    margin: 0 auto;
+    width: 50%;
+}
+
+#location{
+    position: relative;
+    text-align: center;
+}
+
+.Result{
+    position: relative;
+    margin:0 auto;
+    overflow: auto;
+    background-color: black;
+    opacity: 0.75;
+    border-radius: 10px;
+    border:5px solid black;
+}
+
+.Result .DisplayWeather{
+    position: relative;
+    text-align:center;
+}
+
+@media screen and (min-width: 375px){
+    .Result{
+        background-color: black;
+        position: relative;
+        margin:0 auto;
+        overflow: auto;
+        opacity: 0.75;
+    }
+}
+
+@media screen and (min-width: 600px){
+    .Result{
+        background-color: black;
+        position: relative;
+        width: 40%;
+        margin:0 auto;
+        overflow: auto;
+        opacity: 0.75;
+    }
+}
