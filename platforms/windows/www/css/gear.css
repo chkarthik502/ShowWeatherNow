@@ -1,0 +1,106 @@
+﻿.bottompanel{
+position:fixed;
+bottom:-100%;
+/*left:0%;*/
+margin: 0 auto;
+height:80%; 
+background-color: black;
+opacity: 0.90;
+width: 100%;
+display: block;
+z-index:999999;
+}
+
+#close{
+    width: 100%;
+    background-color: red;
+    opacity: 0.75;
+}
+
+
+#left-panel{
+    position: relative;
+    width: 80px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.reveal{
+    position: relative;
+    /*width: 60px;*/
+    /*height: auto;*/
+    /*background-color: black;*/
+}
+
+#left-panel p{
+    font-size:medium;
+}
+
+#left-panel{
+    float: left;
+}
+
+.gear{
+    position: relative;
+/*    top:0%;*/
+    width: 60px;
+    height: auto;
+    /*background-color: black;*/
+    border-radius: 10px;
+    opacity: 0.75;
+}
+
+.gear #gloves{
+    width: 40px;
+    /*margin: 0 auto;*/
+    float: left;
+}
+
+.gear #gloves img{
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    border: 4px solid black;
+}
+
+.gear #jacket{
+    width: 40px;
+    /*margin: 0 auto;*/
+    float: left;
+}
+
+.gear #jacket img{
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    border: 4px solid gray;
+    opacity: 0.20;
+}
+
+.gear #umbrella{
+    width: 40px;
+    /*margin: 0 auto;*/
+    float: left;
+}
+
+.gear #umbrella img{
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    border: 4px solid gray;
+    opacity: 0.20;
+}
+
+.gear #shades{
+    width: 40px;
+    /*margin: 0 auto;*/
+    float: left;
+}
+
+.gear #shades img{
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    border: 4px solid gray;
+    opacity: 0.20;
+}

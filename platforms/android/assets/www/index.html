@@ -29,21 +29,16 @@
         <link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" type="text/css" href="css/gear.css" />
-        <title>Hello Karthik</title>
+        <title>Show Weather Now</title>
     </head>
     <body>
         <div data-role="page" id="home" data-fullscreen="true" data-theme="b">
-            <!-- <div data-role="header" data-position="fixed">
-                
-            </div> -->
+            <div data-role="header" data-position="fixed">
+                <a href="#left-panel" data-theme="none" data-icon="arrow-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc"><div class="reveal"></div></a>
+                <a href="#right-panel" data-theme="none" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc"><div class="reveal">Reveal</div></a>
+            </div>
             <div data-role="main" class="ui-content">
                 <p id="message"></p>
-            <div class = "flipUnit" data-role="fieldcontain">
-                <select name="flip-5" id="flip-5" data-role="slider" data-theme="b" data-track-theme="b" data-mini="true">
-                        <option value="F" selected="selected">&#8457;</option>
-                        <option value="C">&#8451;</option>
-                </select>
-            </div>
             <div class="output">
              <div id="location">
              </div>
@@ -53,14 +48,20 @@
                     <h3 id ="summary"></h3>
               </div>
              </div>
-               <!--  <div class="hourly">
+             <a id="openbottompanel">Hourly weather</a> 
+              
+            </div>
+            <div class="bottompanel" id="box">
+            <div id="close" data-theme="none" data-icon="arrow-d" data-iconpos="notext" data-shadow="false" data-iconshadow="false" data-iconpos="center" class="ui-icon-nodisc">close</div>
+             <div style="width:100%;height:200px;overflow:auto">
+                <div class="hourly">
                     <table>
                         <tr id="hour"></tr>
                         <tr id="temp"></tr>
                     </table>
-                </div> -->
+                </div>
             </div>
-            <a href="#left-panel" data-theme="d" data-icon="arrow-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc"><div id="reveal">Reveal</div></a>
+            </div>
             <div data-role="panel" data-display="overlay" id="left-panel" data-theme="b">
                     <div class="gear">
                         <div id ="gloves"><img src="img/gloves-icon.png"></div>
@@ -70,7 +71,15 @@
                     </div>
                 <!-- <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="left"></a> -->
             </div>
-            <div data-role="footer" data-position="fixed">
+            <div data-role="panel" data-position="right" data-display="overlay" id="right-panel" data-theme="b" class="options">
+                <div class = "flipUnit" data-role="fieldcontain"> 
+                <select name="flip-5" id="flip-5" data-role="slider" data-theme="b" data-track-theme="b" data-mini="true">
+                        <option value="F" selected="selected">&#8457;</option>
+                        <option value="C">&#8451;</option>
+                </select>
+            </div>
+            </div>
+            <div data-role="footer" data-position="fixed" data-fullscreen="false">
                 <p id="timestamp"></p>
             </div>
         </div>

@@ -1,22 +1,5 @@
-/*#home * {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-}
-
-#home .ui-header .ui-btn {
-    background: none;
-    border: none;
-    top: 9px;
-}
-#home .ui-header .ui-btn-inner {
-    border: none;
-}*/
-
 .ui-page {
-    background: transparent url(../img/gray_background.jpg);
+    background: transparent url(../img/background/bkg-9.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -69,9 +52,10 @@
     position: relative;
     margin:0 auto;
     overflow: auto;
-    background-color: black;
-    opacity: 0.75;
-    border-radius: 10px;
+    /*background-color: black;*/
+    border:5px solid black;
+    /*opacity: 0.75;*/
+    border-radius: 30px;
     border:5px solid black;
 }
 
@@ -82,21 +66,23 @@
 
 @media screen and (min-width: 375px){
     .Result{
-        background-color: black;
+        /*background-color: black;*/
+        border:5px solid black;
         position: relative;
         margin:0 auto;
         overflow: auto;
-        opacity: 0.75;
+        /*opacity: 0.75;*/
     }
 }
 
 @media screen and (min-width: 600px){
     .Result{
-        background-color: black;
+        /*background-color: black;*/
+        border:5px solid black;
         position: relative;
         width: 40%;
         margin:0 auto;
         overflow: auto;
-        opacity: 0.75;
+        /*opacity: 0.75;*/
     }
 }

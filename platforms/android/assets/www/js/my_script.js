@@ -13,18 +13,22 @@ var defaultLat = "34.0983425";
 	var summary;
 	var timestamp;
 	var hourly;
-$( document ).on( "pageinit","#home",function(){
+$( document ).on( "pageinit",function(){
 	// $.mobile.orientationChangeEnabled = false;
-	$( document ).on( "swiperight", "#home", function( e ) {
+	$( document ).on( "swipeleft swiperight", "#home", function( e ) {
         // We check if there is no open panel on the page because otherwise
         // a swipe to close the left panel would also open the right panel (and v.v.).
         // We do this by checking the data that the framework stores on the page element (panel: open).
         if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
-            if ( e.type === "swiperight" ) {
+        	if(e.type==="swipeleft"){
+        		$("#right-panel").panel("open");
+        	}
+            else if ( e.type === "swiperight" ) {
                 $( "#left-panel" ).panel( "open" );
             }
         }
     });
+
 	var jqxhr = $.getJSON( "http://ipinfo.io", function (response) {
     defaultCity = response.city + ", " + response.region;
     link = url + forecastApiKey + "/" + response.loc;
@@ -44,6 +48,18 @@ $( document ).on( "pageinit","#home",function(){
    getWeather(link);
 });
 });
+
+   $('#openbottompanel').click(function(){
+            $('#box').animate({'bottom':'0'},300);
+        });
+  
+    $('#close').click(function(){
+        $('#box').animate({'bottom':'-100%'},300)        
+    });
+
+    // $('#box').click(function(){
+    //     $('#box').animate({'bottom':'-100%'},300)        
+    // });
 
 // To get location details like coordinates, city and state and set global variables.
 function getLocation(){
