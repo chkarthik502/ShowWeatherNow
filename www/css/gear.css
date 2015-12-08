@@ -1,78 +1,112 @@
+#openbottompanel{
+    padding-top:50px;
+}
+
+
+.bottompanel{
+position:fixed;
+bottom:-100%;
+left:0%;
+margin: 0 auto;
+height:80%; 
+background-color: black;
+opacity: 0.90;
+width: 100%;
+display: block;
+z-index:999999;
+}
+
+#close{
+    position: relative;
+    width: 100%;
+    background-color: black;
+    text-align: center;
+    font-color:gray;
+}
+
 #left-panel{
     position: relative;
-    width: 100px;
+    width: 80px;
     height: auto;
     border-radius: 10px;
 }
 
-#reveal{
+.reveal{
     position: relative;
-    width: 60px;
-    height: auto;
-    background-color: black;
+    /*width: 60px;*/
+    /*height: auto;*/
+    /*background-color: black;*/
 }
 
 #left-panel p{
     font-size:medium;
 }
 
+#left-panel{
+    float: left;
+}
+
 .gear{
     position: relative;
-    top:0%;
+/*    top:0%;*/
     width: 60px;
     height: auto;
-    background-color: black;
+    /*background-color: black;*/
     border-radius: 10px;
     opacity: 0.75;
 }
 
 .gear #gloves{
     width: 40px;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
+    float: left;
 }
 
 .gear #gloves img{
     width: 40px;
     height: 40px;
-    border-radius: 20px;
-    border: 3px solid gray;
+    border-radius: 30px;
+    border: 4px solid black;
 }
 
 .gear #jacket{
     width: 40px;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
+    float: left;
 }
 
 .gear #jacket img{
     width: 40px;
     height: 40px;
-    border-radius: 20px;
-    border: 3px solid gray;
-    opacity: 0.25;
+    border-radius: 30px;
+    border: 4px solid gray;
+    opacity: 0.20;
 }
 
 .gear #umbrella{
     width: 40px;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
+    float: left;
 }
 
 .gear #umbrella img{
     width: 40px;
     height: 40px;
-    border-radius: 20px;
-    border: 3px solid gray;
-    opacity: 0.25;
+    border-radius: 30px;
+    border: 4px solid gray;
+    opacity: 0.20;
 }
 
 .gear #shades{
     width: 40px;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
+    float: left;
 }
 
 .gear #shades img{
     width: 40px;
     height: 40px;
-    border-radius: 20px;
-    border: 3px solid gray;
-    opacity: 0.25;
+    border-radius: 30px;
+    border: 4px solid gray;
+    opacity: 0.20;
 }

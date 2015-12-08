@@ -13,22 +13,30 @@ var defaultLat = "34.0983425";
 	var summary;
 	var timestamp;
 	var hourly;
+	var HoursOfDisplay = 24;
+	var HourlyDisplay;
+
 $( document ).on( "pageinit",function(){
 	// $.mobile.orientationChangeEnabled = false;
-	$( document ).on( "swiperight", "#reveal", function( e ) {
+	$( document ).on( "swipeleft swiperight", "#home", function( e ) {
         // We check if there is no open panel on the page because otherwise
         // a swipe to close the left panel would also open the right panel (and v.v.).
         // We do this by checking the data that the framework stores on the page element (panel: open).
         if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
-            if ( e.type === "swiperight" ) {
-                $( "#left-panel" ).panel( "open" );
+        	if(e.type==="swipeleft"){
+        		if($("#box").css('bottom') != "0px"){
+        		$("#right-panel").panel("open");}
+        	}
+            else if ( e.type === "swiperight" ) {
+            	if($("#box").css('bottom') != "0px"){
+                $( "#left-panel" ).panel( "open" );}
             }
         }
     });
+
 	var jqxhr = $.getJSON( "http://ipinfo.io", function (response) {
     defaultCity = response.city + ", " + response.region;
     link = url + forecastApiKey + "/" + response.loc;
-    // $("ul").append("<li>"+link+"</li>");
 })
   .done(function() {
     console.log( "second success" );
@@ -45,12 +53,23 @@ $( document ).on( "pageinit",function(){
 });
 });
 
+   $('#openbottompanel').click(function(){
+        $('#box').animate({'bottom':'0'},300);
+     });
+  
+    $('#close').click(function(){
+        $('#box').animate({'bottom':'-100%'},300)        
+    });
+
+    // $('#box').click(function(){
+    //     $('#box').animate({'bottom':'-100%'},300)        
+    // });
+
 // To get location details like coordinates, city and state and set global variables.
 function getLocation(){
 	$.getJSON("http://ipinfo.io", function (response) {
     defaultCity = response.city + ", " + response.region;
     link = url + forecastApiKey + "/" + response.loc;
-    // $("ul").append("<li>"+link+"</li>");
 }, "jsonp");
 }
 
@@ -65,34 +84,29 @@ function getWeather(link){
 		contentType: "application/json",
 		dataType: "jsonp",
 		success: function(weather){
-			// var temp = data.main.temp;
 			currentTempInF = Math.round(weather.currently.temperature);
 			currentTempInC = Math.round((weather.currently.temperature-32) * 0.5556);
 			summary = weather.currently.summary;
 			timestamp = new Date($.now());
-			if($("#flip-5").val()=="C")
-			{
-				Temperature = currentTempInC;
-				defaultUnit = CelHtmlCode;
-			}
-			else
-			{
-				Temperature = currentTempInF;
-				defaultUnit = FahHtmlCode;
-			}
+			setTempFormat();
 
+			HourlyDisplay = weather.hourly.data;
 			var arr = weather.hourly.data;
-			// var dt;
-			// var myDate;
-			// var cHour;
+			var hourlyTemp;
 			$.each(arr,function(i,val){
 				var dt = eval(val.time*1000);
 				var myDate = new Date(dt);
 				var cHour = myDate.getHours();
-				var hourlyTemp = Math.round(val.temperature);
-				if(i<12)
+				var formatHour = getHourFormat(cHour);
+				var hourlyTempInF = Math.round(val.temperature);
+				var hourlyTempInC = Math.round((val.temperature-32) * 0.5556);
+				if(defaultUnit==FahHtmlCode){
+					hourlyTemp = hourlyTempInF;}
+				else{hourlyTemp = hourlyTempInC;}
+
+				if(i<HoursOfDisplay)
 				{
-					$("#hour").append("<td>"+cHour+"</td>");
+					$("#hour").append("<td>"+formatHour+"</td>");
 					$("#temp").append("<td>"+hourlyTemp+"&nbsp;"+defaultUnit+"</td>");
 				}
 			});
@@ -108,6 +122,31 @@ function getWeather(link){
 		}
 	});
 	}
+
+	function getHourFormat(value){
+		var retVal;
+		if(value<12){
+			if(value==0){retVal = "12 AM";}
+			else{retVal = value + " AM";}
+		}
+		else{
+			if(value==12){retVal = value + " PM";}
+			else{retVal = (value - 12) + " PM";}
+		}
+		return retVal;
+	}
+
+function setTempFormat(){
+	if($("#flip-5").val()=="C"){
+		Temperature = currentTempInC;
+		defaultUnit = CelHtmlCode;
+	}
+	else{
+		Temperature = currentTempInF;
+		defaultUnit = FahHtmlCode;
+	}
+}
+
 
 //call below function in case if user toggles the unit switch.
 $("#flip-5").on('change', function (event) {
@@ -131,22 +170,16 @@ else{
 
 // To get browser location details.
 function getBrowserLocation(){
-	if(navigator.geolocation)
-	{
-		function success(pos)
-		{
+	if(navigator.geolocation){
+		function success(pos){
 			defaultLat = pos.coords.latitude;
 			defaultLong = pos.coords.longitude;
 			link = url + forecastApiKey + "/" + defaultLat + "," + defaultLong;
 		}
-		function fail(error)
-		{
-		 $("message").append(error.code);
-		}
+		function fail(error){
+		 $("message").append(error.code);}
 		navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 500000, enableHighAccuracy:true, timeout: 6000});
 	}
-	else
-	{
-		alert("no location support");
-	}
+	else{
+		alert("no location support");}
 }
