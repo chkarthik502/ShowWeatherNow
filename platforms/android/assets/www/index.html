@@ -41,21 +41,22 @@
                 <p id="message"></p>
             <div class="output">
              <div id="location">
-             </div>
+            </div>
              <div class="Result">
               <div class="DisplayWeather">
                     <h1 id="currenttemp"></h1>
                     <h3 id ="summary"></h3>
               </div>
              </div>
-             <a id="openbottompanel">Hourly weather</a> 
-              
+             <div id="openbottompanel">
+             <a>Hourly weather</a>
+            </div>
             </div>
             <div class="bottompanel" id="box">
-            <div id="close" data-theme="none" data-icon="arrow-d" data-iconpos="notext" data-shadow="false" data-iconshadow="false" data-iconpos="center" class="ui-icon-nodisc">close</div>
+            <div id="close"><b>&or;</b></div>
              <div style="width:100%;height:200px;overflow:auto">
                 <div class="hourly">
-                    <table>
+                    <table style= "overflow-x: scroll !important;">
                         <tr id="hour"></tr>
                         <tr id="temp"></tr>
                     </table>

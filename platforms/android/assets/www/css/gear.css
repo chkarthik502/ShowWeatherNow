@@ -1,7 +1,12 @@
+#openbottompanel{
+    padding-top:50px;
+}
+
+
 .bottompanel{
 position:fixed;
 bottom:-100%;
-/*left:0%;*/
+left:0%;
 margin: 0 auto;
 height:80%; 
 background-color: black;
@@ -12,11 +17,12 @@ z-index:999999;
 }
 
 #close{
+    position: relative;
     width: 100%;
-    background-color: red;
-    opacity: 0.75;
+    background-color: black;
+    text-align: center;
+    font-color:gray;
 }
-
 
 #left-panel{
     position: relative;
