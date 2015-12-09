@@ -2,13 +2,13 @@
     padding-top:50px;
 }
 
-#hourlyTitle{
+/*#hourlyTitle{
     color:gray;
     margin-left: 15px;
-}
+}*/
 
 #mainbottompannel{
-
+    padding-right: 10px;
 }
 
 .bottompanel{
@@ -16,8 +16,8 @@ position:fixed;
 bottom:-100%;
 left:0%;
 margin: 0 auto;
-height:80%; 
-background-color: white;
+height:100%; 
+/*background-color: white;*/
 /*opacity: 0.90;*/
 width: 100%;
 display: block;
@@ -28,7 +28,10 @@ z-index:999999;
     position: relative;
     width: 100%;
     text-align: center;
-    font-color:black;
+    background: black;
+    opacity: 0.95;
+    border-radius: 10px;
+    color:gray;
     font-size:30px;
     font-weight: 5;
 }
