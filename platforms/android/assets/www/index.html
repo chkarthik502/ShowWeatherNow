@@ -41,7 +41,7 @@
                 <p id="message"></p>
             <div class="output">
              <div id="location">
-            </div>
+             </div>
              <div class="Result">
               <div class="DisplayWeather">
                     <h1 id="currenttemp"></h1>
@@ -50,19 +50,19 @@
              </div>
              <div id="openbottompanel">
              <a>Hourly weather</a>
+             </div>
             </div>
-            </div>
-            <div class="bottompanel" id="box">
-            <div id="close"><b>&or;</b></div>
-             <div style="width:100%;height:200px;overflow:auto">
-                <div class="hourly">
-                    <table style= "overflow-x: scroll !important;">
-                        <tr id="hour"></tr>
-                        <tr id="temp"></tr>
-                    </table>
+            <div id="mainbottompannel" class="box"></div>
+                <div id="bottompanel" class="box">
+                    <div id="close"><b>&or;</b></div>
+                    <div id="hourlyreportTitle">Hourly Forecast</div>
+                    <div id="hourlyreport">
+                        <div class="hourly">
+                            <table id="hourlyTable">
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            </div>
             <div data-role="panel" data-display="overlay" id="left-panel" data-theme="b">
                     <div class="gear">
                         <div id ="gloves"><img src="img/gloves-icon.png"></div>
@@ -85,7 +85,7 @@
             </div>
         </div>
         <script src="jquery/jquery-1.11.3.min.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>
+        <!--<script type="text/javascript" src="cordova.js"></script>-->
         <script type="text/javascript" src="js/index.js"></script>
         <script>
         $(document).bind('mobileinit',function(){
@@ -95,7 +95,8 @@
         });
         </script>
         <script src="jquery/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript" src="js/my_script.js"></script>
+        <script type="text/javascript" src="js/core.js"></script>
+        <script type="text/javascript" src="js/events.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>

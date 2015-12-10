@@ -1,4 +1,4 @@
-//-------------------------------------Events-----------------------------------------
+﻿//-------------------------------------Events-----------------------------------------
 
 //swipe left gesture: To display right panel.
 //Swipe right gesture: To display left panel.
@@ -11,14 +11,14 @@ if ( $.mobile.activePage.jqmData( "panel" ) !== "open" )
 {
 	if(e.type==="swipeleft")
 	{
-		if($(".box").css('bottom') != "0px")
+		if($("#box").css('bottom') != "0px")
 		{
 			$("#right-panel").panel("open");
 		}
 	}
     else if ( e.type === "swiperight" )
     {
-    	if($(".box").css('bottom') != "0px")
+    	if($("#box").css('bottom') != "0px")
     	{
         $( "#left-panel" ).panel( "open" );
     	}
@@ -28,10 +28,10 @@ if ( $.mobile.activePage.jqmData( "panel" ) !== "open" )
 
 //Show the bottom panel when the button is clicked.
 $('#openbottompanel').click(function(){
-    $('.box').animate({'bottom':'0'},300);
+    $('#box').animate({'bottom':'0'},300);
  });
 
 //Close the bottom panel when a button or div is clicked.
 $('#close').click(function(){
-    $('.box').animate({'bottom':'-100%'},300)        
+    $('#box').animate({'bottom':'-100%'},300)        
 });

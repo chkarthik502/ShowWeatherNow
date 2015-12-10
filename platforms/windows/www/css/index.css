@@ -7,25 +7,48 @@
     width: 100%;
 }
 
+#hourlyreport{
+    background-color: black;
+    opacity: 0.95;
+    margin:10px 10px;
+    border-radius: 10px;
+}
+
+#hourlyreport h4{
+    color:gray;
+    text-align: center;
+    padding-top: 15px;
+}
+
 .hourly{
-    padding-top: 50px;
-    position: relative;
+/*    margin-top: 10px;*/
+    /*position: relative;*/
+    width: 100%;
+    overflow:auto;
 /*    margin: 0 auto;
     width: 90%;*/
 }
 
-.hourly table{
-    table-layout: auto;
-    background-color: black;
-    opacity: 0.75;
-    border-radius: 10px;
+#hourlyTable{
+    overflow-x: scroll !important;
+    /*table-layout: auto;*/
+    border-collapse:collapse;
+    background-color: gray;
+    /*opacity: 0.75;*/
 /*    text-align: center;*/
 }
 
-.hourly td{
-    padding: 15px;
-    background-color: gray;
-    opacity: 0.75;
+#hourlyTable td{
+    padding: 10px 30px 30px 30px;
+    border-right: solid 1px #a9a9a9; 
+    border-left: solid 1px #a9a9a9;
+    /*overflow: auto;*/
+    /*opacity: 0.75;*/
+}
+
+#temp{
+    font-size: 25px;
+    font-weight: 5;
 }
 
 .flipUnit{

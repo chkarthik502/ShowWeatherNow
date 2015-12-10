@@ -1,4 +1,4 @@
-var defaultLat = "34.0983425";
+﻿var defaultLat = "34.0983425";
 	var defaultLong = "-118.3267434";
 	var url = "https://api.forecast.io/forecast/";
 	var forecastApiKey = "66d346b34ef768fa003792f04b07f316";
@@ -12,28 +12,11 @@ var defaultLat = "34.0983425";
 	var Temperature;
 	var summary;
 	var timestamp;
-	var hourly;
 	var HoursOfDisplay = 24;
-	var HourlyDisplay;
+	var HourlyData;
 
 $( document ).on( "pageinit",function(){
 	// $.mobile.orientationChangeEnabled = false;
-	$( document ).on( "swipeleft swiperight", "#home", function( e ) {
-        // We check if there is no open panel on the page because otherwise
-        // a swipe to close the left panel would also open the right panel (and v.v.).
-        // We do this by checking the data that the framework stores on the page element (panel: open).
-        if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
-        	if(e.type==="swipeleft"){
-        		if($("#box").css('bottom') != "0px"){
-        		$("#right-panel").panel("open");}
-        	}
-            else if ( e.type === "swiperight" ) {
-            	if($("#box").css('bottom') != "0px"){
-                $( "#left-panel" ).panel( "open" );}
-            }
-        }
-    });
-
 	var jqxhr = $.getJSON( "http://ipinfo.io", function (response) {
     defaultCity = response.city + ", " + response.region;
     link = url + forecastApiKey + "/" + response.loc;
@@ -52,18 +35,6 @@ $( document ).on( "pageinit",function(){
    getWeather(link);
 });
 });
-
-   $('#openbottompanel').click(function(){
-        $('#box').animate({'bottom':'0'},300);
-     });
-  
-    $('#close').click(function(){
-        $('#box').animate({'bottom':'-100%'},300)        
-    });
-
-    // $('#box').click(function(){
-    //     $('#box').animate({'bottom':'-100%'},300)        
-    // });
 
 // To get location details like coordinates, city and state and set global variables.
 function getLocation(){
@@ -84,57 +55,104 @@ function getWeather(link){
 		contentType: "application/json",
 		dataType: "jsonp",
 		success: function(weather){
-			currentTempInF = Math.round(weather.currently.temperature);
-			currentTempInC = Math.round((weather.currently.temperature-32) * 0.5556);
-			summary = weather.currently.summary;
-			timestamp = new Date($.now());
+			setCurrentSummary(weather);
+			setTimeStamp();
 			setTempFormat();
+			setHourlyData(weather);
 
-			HourlyDisplay = weather.hourly.data;
-			var arr = weather.hourly.data;
-			var hourlyTemp;
-			$.each(arr,function(i,val){
-				var dt = eval(val.time*1000);
-				var myDate = new Date(dt);
-				var cHour = myDate.getHours();
-				var formatHour = getHourFormat(cHour);
-				var hourlyTempInF = Math.round(val.temperature);
-				var hourlyTempInC = Math.round((val.temperature-32) * 0.5556);
-				if(defaultUnit==FahHtmlCode){
-					hourlyTemp = hourlyTempInF;}
-				else{hourlyTemp = hourlyTempInC;}
-
-				if(i<HoursOfDisplay)
-				{
-					$("#hour").append("<td>"+formatHour+"</td>");
-					$("#temp").append("<td>"+hourlyTemp+"&nbsp;"+defaultUnit+"</td>");
-				}
-			});
-
-			$("#location").append("<h3>"+defaultCity+"</h3>");
-			$("#currenttemp").text(Temperature+ " " );
-			$("#currenttemp").append("&nbsp;"+ defaultUnit);
-			$("#summary").text(summary);
-			$("#timestamp").append(timestamp);
+			displayCurrentLocation
+			displayCurrentSummary();	
+			displayHourlyReport(HourlyData);
+			displayTimeStamp();
 		},
 		error: function (result) {
-			$("ul").append("<li>"+result+"</li>");
+			$("#message").text(result);
 		}
 	});
 	}
 
-	function getHourFormat(value){
-		var retVal;
-		if(value<12){
-			if(value==0){retVal = "12 AM";}
-			else{retVal = value + " AM";}
-		}
-		else{
-			if(value==12){retVal = value + " PM";}
-			else{retVal = (value - 12) + " PM";}
-		}
-		return retVal;
+function displayHourlyReport(HourlyData)
+{
+	var hourlyTemp;
+	 $("#hourlyTable tr").remove();
+	 $("#hourlyTable").append("<tr id='hour'></tr>");
+	 $("#hourlyTable").append("<tr id='temp'></tr>");
+     
+	$.each(HourlyData,function(i,val){
+		var dt = eval(val.time*1000);
+		var myDate = new Date(dt);
+		// var cHour = myDate.getHours();
+		var formatHour = getHourFormat(myDate);
+		var hourlyTempInF = Math.round(val.temperature);
+		var hourlyTempInC = Math.round((val.temperature-32) * 0.5556);
+		if(defaultUnit==FahHtmlCode){
+			hourlyTemp = hourlyTempInF;}
+		else{hourlyTemp = hourlyTempInC;}
+		// if(i<HoursOfDisplay)
+		// {
+			$("#hour").append("<td>"+formatHour[0]+"<br>"+"<b>"+formatHour[1]+"<b>"+"</td>");
+			$("#temp").append("<td>"+hourlyTemp+"&nbsp;"+defaultUnit+"</td>");
+		// }
+	});
+}
+
+	function displayCurrentLocation()
+	{
+		$("#location").append("<h3>"+defaultCity+"</h3>");
 	}
+
+	function displayCurrentSummary()
+	{
+			$("#currenttemp").text(Temperature+ " " );
+			$("#currenttemp").append("&nbsp;"+ defaultUnit);
+			$("#summary").text(summary);
+	}
+
+	function setCurrentSummary(weather)
+	{
+		currentTempInF = Math.round(weather.currently.temperature);
+		currentTempInC = Math.round((weather.currently.temperature-32) * 0.5556);
+		summary = weather.currently.summary;
+	}
+
+	function setHourlyData(weather)
+	{
+		HourlyData = weather.hourly.data;
+	}
+
+	function setTimeStamp()
+	{
+		timestamp = new Date($.now());
+	}
+
+	function displayTimeStamp()
+	{
+	 	$("#timestamp").append(timestamp);
+	}
+
+
+function getHourFormat(myDate){
+	var cHour = myDate.getHours();
+	var weekday = ["Sun","Mon","Tues",
+						"Wed","Thur",
+						"Fri","Sat"];
+	var today = weekday[timestamp.getDay()];
+	var day = weekday[myDate.getDay()];
+	var retVal = new Array(2);
+	if(today==day)
+	{
+		day="Today";
+	}
+	if(cHour<12){
+		if(cHour==0){retVal[0] =  day; retVal[1] ="12AM";}
+		else{retVal[0] = day; retVal[1] = cHour + "AM";}
+	}
+	else{
+		if(cHour==12){retVal[0]  = day; retVal[1] = cHour + "PM";}
+		else{retVal[0] = day; retVal[1] = (cHour - 12) + "PM";}
+	}
+	return retVal;
+}
 
 function setTempFormat(){
 	if($("#flip-5").val()=="C"){
@@ -153,17 +171,21 @@ $("#flip-5").on('change', function (event) {
 if($("#flip-5").val()=="F"){
 	Temperature = currentTempInF;
 	defaultUnit = FahHtmlCode;
-	$("#currenttemp").text(Temperature+ " " );
-	$("#currenttemp").append("&nbsp;"+ defaultUnit);
-	$("#summary").text(summary);
+	displayCurrentSummary();
+	displayHourlyReport(HourlyData);
+	// $("#currenttemp").text(Temperature+ " " );
+	// $("#currenttemp").append("&nbsp;"+ defaultUnit);
+	// $("#summary").text(summary);
     $("#flip-5").val("F").flipswitch("refresh");
 }
 else{
 	Temperature = currentTempInC;
 	defaultUnit = CelHtmlCode;
-	$("#currenttemp").text(Temperature+ " " );
-	$("#currenttemp").append("&nbsp;"+ defaultUnit);
-	$("#summary").text(summary);
+	displayCurrentSummary();
+	displayHourlyReport(HourlyData);
+	// $("#currenttemp").text(Temperature+ " " );
+	// $("#currenttemp").append("&nbsp;"+ defaultUnit);
+	// $("#summary").text(summary);
     $("#flip-5").val("C").flipswitch("refresh");
 }
 });

@@ -48,16 +48,17 @@
                     <h3 id ="summary"></h3>
               </div>
              </div>
-             <a id="openbottompanel">Hourly weather</a> 
-              
+             <div id="openbottompanel">
+             <a>Hourly weather</a>
+             </div>
             </div>
+            <div id="mainbottompannel">
             <div class="bottompanel" id="box">
-            <div id="close" data-theme="none" data-icon="arrow-d" data-iconpos="notext" data-shadow="false" data-iconshadow="false" data-iconpos="center" class="ui-icon-nodisc">close</div>
-             <div style="width:100%;height:200px;overflow:auto">
+            <div id="close"><b>&or;</b></div>
+            <div id="hourlyreport">
+            <h4>HOURLY REPORT</h4>
                 <div class="hourly">
-                    <table>
-                        <tr id="hour"></tr>
-                        <tr id="temp"></tr>
+                    <table id="hourlyTable">
                     </table>
                 </div>
             </div>
@@ -84,7 +85,7 @@
             </div>
         </div>
         <script src="jquery/jquery-1.11.3.min.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>
+        <!--<script type="text/javascript" src="cordova.js"></script>-->
         <script type="text/javascript" src="js/index.js"></script>
         <script>
         $(document).bind('mobileinit',function(){
@@ -94,7 +95,8 @@
         });
         </script>
         <script src="jquery/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript" src="js/my_script.js"></script>
+        <script type="text/javascript" src="js/core.js"></script>
+        <script type="text/javascript" src="js/events.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
