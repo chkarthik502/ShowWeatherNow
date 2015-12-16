@@ -29,6 +29,8 @@
         <link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" type="text/css" href="css/gear.css" />
+        <link rel="stylesheet" type="text/css" href="css/weather-icons.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/weather-icons-wind.min.css" />
         <title>Show Weather Now</title>
     </head>
     <body>
@@ -54,7 +56,7 @@
             </div>
             <div id="mainbottompannel" class="box"></div>
                 <div id="bottompanel" class="box">
-                    <div id="close"><b>&or;</b></div>
+                    <div id="close"><b>&#x25BC</b></div>
                     <div id="hourlyreportTitle">Hourly Forecast</div>
                     <div id="hourlyreport">
                         <div class="hourly">
@@ -65,10 +67,10 @@
                 </div>
             <div data-role="panel" data-display="overlay" id="left-panel" data-theme="b">
                     <div class="gear">
-                        <div id ="gloves"><img src="img/gloves-icon.png"></div>
-                        <div id="jacket"><img src="img/jacket-icon.jpg"></div>
-                        <div id="shades"><img src="img/shades-icon.png"></div>
-                        <div id="umbrella"><img src="img/umbrella-icon.png"></div>
+                        <div id ="gloves"><img id="glovespic" src="img/gloves-icon.png"></div>
+                        <div id="jacket"><img id="jacketpic" src="img/jacket-icon.jpg"></div>
+                        <div id="shades"><img id="shadespic" src="img/shades-icon.png"></div>
+                        <div id="umbrella"><img id="umbrellapic" src="img/umbrella-icon.png"></div>
                     </div>
                 <!-- <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="left"></a> -->
             </div>
@@ -78,7 +80,11 @@
                         <option value="F" selected="selected">&#8457;</option>
                         <option value="C">&#8451;</option>
                 </select>
-            </div>
+                </div>
+                <div class="recommendHours" data-role="fieldcontain">
+                <!-- <label id="recommendgearsLabel" for="slider-1"></label> -->
+                <input type="range" name="slider-1" id="hour-slider" value="8" min="1" max="12" data-highlight="true"/>
+                </div>
             </div>
             <div data-role="footer" data-position="fixed" data-fullscreen="false">
                 <p id="timestamp"></p>

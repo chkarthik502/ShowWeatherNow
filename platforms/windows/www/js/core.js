@@ -14,6 +14,21 @@
 	var timestamp;
 	var HoursOfDisplay = 24;
 	var HourlyData;
+	var recommendgearHours;
+
+var icons = {"night-clear": "wi-forecast-io-clear-night",
+"rain": "wi-forecast-io-rain",
+"snow": "wi-forecast-io-snow",
+"sleet": "wi-forecast-io-sleet",
+"strong-wind": "wi-forecast-io-wind",
+"fog": "wi-forecast-io-fog",
+"cloudy": "wi-forecast-io-cloudy" ,
+"day-cloudy": "wi-forecast-io-partly-cloudy-day" ,
+"night-cloudy": "wi-forecast-io-partly-cloudy-night",
+"hail": "wi-forecast-io-hail",
+"thunderstorm": "wi-forecast-io-thunderstorm",
+"tornado": "wi-forecast-io-tornado"};
+
 
 $( document ).on( "pageinit",function(){
 	// $.mobile.orientationChangeEnabled = false;
@@ -33,6 +48,12 @@ $( document ).on( "pageinit",function(){
 
   jqxhr.complete(function() {
    getWeather(link);
+   	$("#hour-slider").on("change", function (event){
+    recommendgearHours = $("#hour-slider").val();
+    // alert(recommendgearHours);
+    console.log("changed hours: "+recommendgearHours);
+    RecommendGears(HourlyData);
+	});
 });
 });
 
@@ -60,10 +81,13 @@ function getWeather(link){
 			setTempFormat();
 			setHourlyData(weather);
 
-			displayCurrentLocation
+			displayCurrentLocation();
 			displayCurrentSummary();	
 			displayHourlyReport(HourlyData);
 			displayTimeStamp();
+			setRecommendGearHours();
+			RecommendGears(HourlyData);
+
 		},
 		error: function (result) {
 			$("#message").text(result);
@@ -81,6 +105,9 @@ function displayHourlyReport(HourlyData)
 	$.each(HourlyData,function(i,val){
 		var dt = eval(val.time*1000);
 		var myDate = new Date(dt);
+		var geticonclass = icons[val.icon];
+		if(geticonclass=="undefined"){geticonclass="wi-forecast-io-clear-night";}
+			// else{geticonclass="wi-forecast-io-rain";}
 		// var cHour = myDate.getHours();
 		var formatHour = getHourFormat(myDate);
 		var hourlyTempInF = Math.round(val.temperature);
@@ -90,8 +117,12 @@ function displayHourlyReport(HourlyData)
 		else{hourlyTemp = hourlyTempInC;}
 		// if(i<HoursOfDisplay)
 		// {
-			$("#hour").append("<td>"+formatHour[0]+"<br>"+"<b>"+formatHour[1]+"<b>"+"</td>");
-			$("#temp").append("<td>"+hourlyTemp+"&nbsp;"+defaultUnit+"</td>");
+			// <i class="+geticonclass+"></i>
+			$("#hour").append("<td><h5>"+formatHour[0]+"<br>"+formatHour[1]+"</h5>"+
+				"<small>"+val.icon+"</small>"+
+				"<h3><i class='wi "+geticonclass+"'></i></h3></td>");
+			// $("#hour").append("<td>"+val.icon+"</td>");
+			$("#temp").append("<td><h5>"+hourlyTemp+"&nbsp;"+defaultUnit+"</h5></td>");
 		// }
 	});
 }
@@ -165,6 +196,10 @@ function setTempFormat(){
 	}
 }
 
+function setRecommendGearHours()
+{
+	recommendgearHours = $("#hour-slider").val();
+}
 
 //call below function in case if user toggles the unit switch.
 $("#flip-5").on('change', function (event) {
@@ -204,4 +239,41 @@ function getBrowserLocation(){
 	}
 	else{
 		alert("no location support");}
+}
+
+function RecommendGears(HourlyData)
+{
+	var needJacket=false;
+	var needGloves=false;
+
+		$.each(HourlyData,function(i,val){
+			console.log(val);
+			if(i<recommendgearHours && val.temperature<60)
+			{
+				needJacket = true;
+			}
+
+			if(i<recommendgearHours && val.temperature<50)
+			{
+				needGloves = true;
+			}
+		});
+
+		if(needJacket==true || needGloves==true)
+		{
+			console.log("Need Jacket: " + needJacket +"\n" + "Need Gloves: "+needGloves);
+			console.log("Recommended Hours: "+recommendgearHours);
+		}
+
+		if(needGloves)
+		{
+			$("#glovespic").css("border","5px solid #00FF66");
+			$("#glovespic").css("opacity","1");
+		}
+
+		if(needJacket)
+		{
+			$("#jacketpic").css("border","5px solid #00FF66");
+			$("#jacketpic").css("opacity","1");
+		}
 }
