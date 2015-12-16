@@ -15,7 +15,7 @@
     Unless required by applicable law or agreed to in writing,
     software distributed under the License is distributed on an
     "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
+     KIND, either express`````````````` or implied.  See the License for the
     specific language governing permissions and limitations
     under the License.
 -->
@@ -35,9 +35,9 @@
     </head>
     <body>
         <div data-role="page" id="home" data-fullscreen="true" data-theme="b">
-            <div data-role="header" data-position="fixed">
-                <a href="#left-panel" data-theme="none" data-icon="arrow-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc"><div class="reveal"></div></a>
-                <a href="#right-panel" data-theme="none" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc"><div class="reveal">Reveal</div></a>
+            <div data-role="header">
+                <a href="#left-panel" data-theme="none" data-icon="gear" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc"><div class="reveal"></div></a>
+              <!--   <a href="#right-panel" data-theme="none" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc"><div class="reveal"></div></a> -->
             </div>
             <div data-role="main" class="ui-content">
                 <p id="message"></p>
@@ -65,7 +65,21 @@
                         </div>
                     </div>
                 </div>
-            <div data-role="panel" data-display="overlay" id="left-panel" data-theme="b">
+            <div data-role="panel" data-display="overlay" id="left-panel" data-theme="a">
+                    <!-- <div class = "flipUnit" data-role="fieldcontain">  -->
+                    <label for="flip-5">Units:</label>
+                <select name="flip-5" id="flip-5" data-role="slider" data-mini="true">
+                        <option value="F" selected="selected">&#8457;</option>
+                        <option value="C">&#8451;</option>
+                </select>
+                    <!-- </div> -->
+                    <div>
+                    <lable id="recommendgearsLabel">Recommend gears for next 8 hours:</lable>
+                    <!-- <div class="recommendHours" data-role="fieldcontain"> -->
+                    <input type="range" name="slider-1" id="hour-slider" value="8" min="1" max="12" data-mini="true" data-highlight="true"/>
+                    </div>
+                    <!-- </div> -->
+                    <label id="gearsLabel">Recommended gears:</label>
                     <div class="gear">
                         <div id ="gloves"><img id="glovespic" src="img/gloves-icon.png"></div>
                         <div id="jacket"><img id="jacketpic" src="img/jacket-icon.jpg"></div>
@@ -74,18 +88,9 @@
                     </div>
                 <!-- <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="left"></a> -->
             </div>
-            <div data-role="panel" data-position="right" data-display="overlay" id="right-panel" data-theme="b" class="options">
-                <div class = "flipUnit" data-role="fieldcontain"> 
-                <select name="flip-5" id="flip-5" data-role="slider" data-theme="b" data-track-theme="b" data-mini="true">
-                        <option value="F" selected="selected">&#8457;</option>
-                        <option value="C">&#8451;</option>
-                </select>
-                </div>
-                <div class="recommendHours" data-role="fieldcontain">
-                <!-- <label id="recommendgearsLabel" for="slider-1"></label> -->
-                <input type="range" name="slider-1" id="hour-slider" value="8" min="1" max="12" data-highlight="true"/>
-                </div>
-            </div>
+            <!-- <div data-role="panel" data-position="right" data-display="overlay" id="right-panel" data-theme="b" class="options">
+                
+            </div> -->
             <div data-role="footer" data-position="fixed" data-fullscreen="false">
                 <p id="timestamp"></p>
             </div>
@@ -106,25 +111,5 @@
         <script type="text/javascript">
             app.initialize();
         </script>
-        <!--<script>           
-          function doOnOrientationChange()
-          {
-            switch(window.orientation) 
-            {  
-              case -90:
-              case 90:
-                alert('landscape');
-                break; 
-              default:
-                alert('portrait');
-                break; 
-            }
-          }
-
-          window.addEventListener('orientationchange', doOnOrientationChange);
-
-          // Initial execution if needed
-          doOnOrientationChange();
-         </script>-->
     </body>
 </html>

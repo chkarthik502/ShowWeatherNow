@@ -245,6 +245,8 @@ function RecommendGears(HourlyData)
 {
 	var needJacket=false;
 	var needGloves=false;
+	var needShades = false;
+	var needUmbrella = false;
 
 		$.each(HourlyData,function(i,val){
 			console.log(val);
@@ -259,15 +261,28 @@ function RecommendGears(HourlyData)
 			}
 		});
 
-		if(needJacket==true || needGloves==true)
+		if(needJacket==true || needGloves==true || needShades==true || needUmbrella==true)
 		{
+			if(recommendgearHours==1)
+			{
+				$("#recommendgearsLabel").text("Recommend gears for next "+recommendgearHours+" hour:");
+			}
+			else
+			{
+				$("#recommendgearsLabel").text("Recommend gears for next "+recommendgearHours+" hours:");
+			}
 			console.log("Need Jacket: " + needJacket +"\n" + "Need Gloves: "+needGloves);
 			console.log("Recommended Hours: "+recommendgearHours);
 		}
 
+		if(needJacket==false&&needGloves==false&&needShades==false&&needUmbrella==false)
+		{
+			$("#gearsLabel").text("No need of these gears for next "+recommendgearHours+" hours.");
+		}
+
 		if(needGloves)
 		{
-			$("#glovespic").css("border","5px solid #00FF66");
+			$("#glovespic").css("border","5px solid #0099cc");
 			$("#glovespic").css("opacity","1");
 		}
 
@@ -279,7 +294,7 @@ function RecommendGears(HourlyData)
 
 		if(needJacket)
 		{
-			$("#jacketpic").css("border","5px solid #00FF66");
+			$("#jacketpic").css("border","5px solid #0099cc");
 			$("#jacketpic").css("opacity","1");
 		}
 		if(!needJacket)
